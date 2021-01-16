@@ -1,0 +1,12 @@
+[GIN-MANAGER]2021/01/15 - 13:50:37.550	[34minfo[0m	register table success
+[GIN-MANAGER]2021/01/15 - 13:50:37.551	[34minfo[0m	use middleware logger
+[GIN-MANAGER]2021/01/15 - 13:50:37.552	[34minfo[0m	register swagger handler
+[GIN-MANAGER]2021/01/15 - 13:50:37.552	[34minfo[0m	router register success
+[GIN-MANAGER]2021/01/15 - 13:50:37.552	[34minfo[0m	server run success on 	{"address": ":9000"}
+[GIN-MANAGER]2021/01/15 - 13:52:52.868	[31merror[0m	accept tcp [::]:9000: use of closed network connection
+[GIN-MANAGER]2021/01/15 - 13:52:57.634	[34minfo[0m	register table success
+[GIN-MANAGER]2021/01/15 - 13:52:57.635	[34minfo[0m	use middleware logger
+[GIN-MANAGER]2021/01/15 - 13:52:57.635	[34minfo[0m	register swagger handler
+[GIN-MANAGER]2021/01/15 - 13:52:57.635	[34minfo[0m	router register success
+[GIN-MANAGER]2021/01/15 - 13:52:57.635	[34minfo[0m	server run success on 	{"address": ":9000"}
+[GIN-MANAGER]2021/01/15 - 14:45:44.129	[31merror[0m	accept tcp [::]:9000: use of closed network connection

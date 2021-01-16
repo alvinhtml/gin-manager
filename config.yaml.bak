@@ -1,0 +1,41 @@
+email:
+  to: 'alvinhtml@gmail.com'
+  port: 465
+  from: 'alvinhtml@gmail.com'
+  host: 'smtp.gmail.com'
+  is-ssl: true
+  secret: '********'
+  nickname: 'Alvin'
+jwt:
+  signing-key: 'ginManager'
+local:
+  path: 'uploads/file'
+mysql:
+  path: '127.0.0.1:3306'
+  config: 'charset=utf8mb4&parseTime=True&loc=Local'
+  db-name: 'ginManager'
+  username: 'root'
+  password: '123456'
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-mode: false
+redis:
+  db: 0
+  addr: '127.0.0.1:6379'
+  password: ""
+system:
+  env: 'develop'
+  addr: 8888
+  db-type: 'mysql'
+  oss-type: 'local'
+  use-multipoint: false
+zap:
+  level: debug
+  format: console
+  prefix: '[alvinhtml.com]'
+  director: log
+  link-name: latest_log
+  showLine: true
+  encode-level: LowercaseColorLevelEncoder
+  stacktrace-key: stacktrace
+  log-in-console: true
