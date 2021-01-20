@@ -1,8 +1,6 @@
 package v1
 
 import (
-	"fmt"
-
 	"gin-manager/global/response"
 	"gin-manager/model/request"
 	"gin-manager/model/result"
@@ -24,9 +22,9 @@ func GetOuList(c *gin.Context) {
 
 	err, list, total := service.GetOuList(pageInfo)
 	if err != nil {
-		response.FailWithMessage(fmt.Sprintf("获取数据失败，%v", err), c)
+		response.Fail(err, c)
 	} else {
-		response.OkWithData(result.PageResult{
+		response.Success(result.PageResult{
 			List:     list,
 			Total:    total,
 			Page:     pageInfo.Page,

@@ -8,7 +8,9 @@ import (
 
 // InitUserRouter
 func InitUserRouter(Router *gin.RouterGroup) {
-	// UserRouter := Router.Group("user")
+	UserRouter := Router.Group("users")
 
-	Router.GET("users", v1.GetUserList) // 分页获取用户列表
+	{
+		UserRouter.GET("", v1.GetUserList) // 分页获取用户列表
+	}
 }
