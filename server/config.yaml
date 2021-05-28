@@ -25,7 +25,7 @@ redis:
   password: ""
 system:
   env: 'develop'
-  addr: 9000
+  addr: 8801
   db-type: 'mysql'
   oss-type: 'local'
   use-multipoint: false
