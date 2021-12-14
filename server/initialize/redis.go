@@ -1,7 +1,7 @@
 package initialize
 
 import (
-	"gin-manager/global"
+	"github.com/alvinhtml/gin-manager/server/global"
 
 	"github.com/go-redis/redis"
 	"go.uber.org/zap"

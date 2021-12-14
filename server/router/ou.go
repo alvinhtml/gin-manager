@@ -1,7 +1,7 @@
 package router
 
 import (
-	v1 "gin-manager/api/v1"
+	v1 "github.com/alvinhtml/gin-manager/server/api/v1"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,7 +11,6 @@ func InitOuRouter(Router *gin.RouterGroup) {
 	OuRouter := Router.Group("ous")
 
 	{
-		OuRouter.GET("", v1.GetOuList) // 分页获取部门列表
+		OuRouter.GET("", v1.GetOus) // 分页获取部门列表
 	}
-
 }

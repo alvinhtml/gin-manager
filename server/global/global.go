@@ -3,7 +3,7 @@ package global
 import (
 	"go.uber.org/zap"
 
-	"gin-manager/config"
+	"github.com/alvinhtml/gin-manager/server/config"
 
 	"github.com/go-redis/redis"
 	"github.com/spf13/viper"

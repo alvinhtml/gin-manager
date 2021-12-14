@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"gin-manager/global"
-	"gin-manager/initialize"
+	"github.com/alvinhtml/gin-manager/server/global"
+	"github.com/alvinhtml/gin-manager/server/initialize"
 
 	"go.uber.org/zap"
 )

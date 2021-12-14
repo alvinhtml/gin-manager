@@ -7,7 +7,7 @@ import (
 	"path"
 	"time"
 
-	"gin-manager/global"
+	"github.com/alvinhtml/gin-manager/server/global"
 	zaprotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"go.uber.org/zap/zapcore"
 )

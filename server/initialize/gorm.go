@@ -3,8 +3,8 @@ package initialize
 import (
 	"os"
 
-	"gin-manager/global"
-	"gin-manager/model"
+	"github.com/alvinhtml/gin-manager/server/global"
+	"github.com/alvinhtml/gin-manager/server/model"
 
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"

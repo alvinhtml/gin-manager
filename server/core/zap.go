@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
-	"gin-manager/global"
-	"gin-manager/utils"
+	"github.com/alvinhtml/gin-manager/server/global"
+	"github.com/alvinhtml/gin-manager/server/utils"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

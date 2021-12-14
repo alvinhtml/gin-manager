@@ -1,13 +1,14 @@
 package initialize
 
 import (
-	_ "gin-manager/docs"
-	"gin-manager/global"
-	"gin-manager/router"
 	"net/http"
 
+	_ "github.com/alvinhtml/gin-manager/server/docs"
+	"github.com/alvinhtml/gin-manager/server/global"
+	"github.com/alvinhtml/gin-manager/server/router"
+
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/gin-swagger"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 

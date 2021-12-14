@@ -2,15 +2,15 @@ package request
 
 // Paging common input parameter structure
 type PageInfo struct {
-	Page     int `json:"page" form:"page"`
-	PageSize int `json:"pageSize" form:"pageSize"`
+	Page int `json:"page" form:"page"`
+	Size int `json:"size" form:"size"`
 }
 
 // Find by id structure
-type GetById struct {
-	Id float64 `json:"id" form:"id"`
+type ById struct {
+	Id uint `json:"id" form:"id" uri:"id"`
 }
 
-type IdsReq struct {
-	Ids []int `json:"ids" form:"ids"`
+type byIds struct {
+	Ids []uint `json:"ids" form:"ids"`
 }

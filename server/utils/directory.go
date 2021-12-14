@@ -3,7 +3,7 @@ package utils
 import (
 	"os"
 
-	"gin-manager/global"
+	"github.com/alvinhtml/gin-manager/server/global"
 
 	"go.uber.org/zap"
 )

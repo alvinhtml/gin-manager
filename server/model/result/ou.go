@@ -1,7 +1,7 @@
 package result
 
 import (
-	"gin-manager/model"
+	"github.com/alvinhtml/gin-manager/server/model"
 )
 
 type Ou struct {

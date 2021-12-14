@@ -1,4 +1,4 @@
-module gin-manager
+module github.com/alvinhtml/gin-manager/server
 
 go 1.15
 

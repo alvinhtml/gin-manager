@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"gin-manager/global"
-	_ "gin-manager/packfile"
-	"gin-manager/utils"
+	"github.com/alvinhtml/gin-manager/server/global"
+	_ "github.com/alvinhtml/gin-manager/server/packfile"
+	"github.com/alvinhtml/gin-manager/server/utils"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
