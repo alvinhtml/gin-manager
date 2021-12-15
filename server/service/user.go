@@ -27,17 +27,6 @@ func CreateUser(u model.User) (err error, user model.User) {
 	return err, u
 }
 
-// @title    Login
-// @description   login, 用户登录
-// @return    err             error
-// @return    user       *User
-
-func Login(u *model.User) (err error, user *model.User) {
-	u.Password = utils.MD5V([]byte(u.Password))
-	err = global.DB.Where("name = ? AND password = ?", u.Name, u.Password).Preload("Authority").First(&user).Error
-	return err, user
-}
-
 // @title    GetUsers
 // @description   get user list by pagination, 分页获取数据
 // @return    err              error
@@ -94,4 +83,13 @@ func DeleteUser(id uint) (err error) {
 	// err = global.DB.Where("id = ?", id).Delete(&model.User{}).Error
 	err = global.DB.Delete(&model.User{}, id).Error
 	return err
+}
+
+// @title    Login
+// @description   login, 用户登录
+// @return    err             error
+// @return    user       *User
+func Login(u *model.User) (err error, user *model.User) {
+	u.Password = utils.MD5V([]byte(u.Password))
+	err = global.DB.Where("name = ? AND password = ?", u.Name, u.Password).First(&user).Error
 }
