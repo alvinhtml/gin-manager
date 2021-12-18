@@ -17,9 +17,8 @@ type customClaims struct {
 // @description Verifies a JWT token
 // @return    err             error
 func VerifyToken(token string) (err error) {
-
 	jwtToken, err := jwt.ParseWithClaims(
-		token,
+		string(token),
 		&customClaims{},
 		func(token *jwt.Token) (interface{}, error) {
 			return []byte(global.CONFIG.JWT.SigningKey), nil
@@ -38,6 +37,7 @@ func VerifyToken(token string) (err error) {
 	if claims.ExpiresAt < time.Now().UTC().Unix() {
 		return errors.New("jwt is expired")
 	}
+	return nil
 }
 
 // @title CreateToken
