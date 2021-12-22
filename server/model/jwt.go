@@ -1,10 +1,13 @@
 package model
 
 import (
+	"time"
+
 	"github.com/alvinhtml/gin-manager/server/global"
 )
 
 type Jwt struct {
 	global.MODEL
-	Jwt string `json:"name" gorm:"comment:jwt;type:text;"`
+	Token     string    `json:"token" gorm:"comment:token;type:text;"`
+	ExpiresAt time.Time `json:"ExpiresAt" gorm:"comment:ExpiresAt;type:timestamp;"`
 }

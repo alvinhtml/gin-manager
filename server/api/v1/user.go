@@ -122,3 +122,5 @@ func CreateUser(c *gin.Context) {
 		response.Success(nil, c)
 	}
 }
+
+// @Tags 			apiUser

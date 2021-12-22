@@ -89,9 +89,14 @@ func DeleteUser(id uint) (err error) {
 // @description   login, 用户登录
 // @return    err             error
 // @return    user       *User
-func Login(u model.User) (err error, user model.User) {
+func Login(u model.User) (err error) {
 	u.Password = utils.MD5V([]byte(u.Password))
-	err = global.DB.Where("name = ? AND password = ?", u.Name, u.Password).First(&user).Error
 
-	return err, user
+	db := global.DB.Where("name = ? AND password = ?", u.Name, u.Password).First(&u)
+
+	if !errors.Is(db.Error, gorm.ErrRecordNotFound) {
+		return errors.New("User name or password error")
+	}
+
+	return nil
 }

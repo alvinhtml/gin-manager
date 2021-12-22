@@ -14,7 +14,7 @@ type server interface {
 	ListenAndServe() error
 }
 
-func RunWindowsServer() {
+func RunServer() {
 	if global.CONFIG.System.UseMultipoint {
 		// 初始化redis服务
 		initialize.Redis()

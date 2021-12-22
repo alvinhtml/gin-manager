@@ -2,9 +2,11 @@ package service
 
 import (
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/alvinhtml/gin-manager/server/global"
+	"github.com/alvinhtml/gin-manager/server/model"
 	"github.com/dgrijalva/jwt-go"
 )
 
@@ -25,6 +27,9 @@ func VerifyToken(token string) (err error) {
 		},
 	)
 
+	// 打印 err
+	fmt.Println(err)
+
 	if err != nil {
 		return err
 	}
@@ -44,17 +49,31 @@ func VerifyToken(token string) (err error) {
 // @description Creates a JWT token
 // @return    token           string
 // @return    err             error
-func CreateToken(username string) (signedToken string, err error) {
+func CreateToken(username string) (token model.Jwt, err error) {
+	token.ExpiresAt = time.Now().Add(time.Duration(global.CONFIG.JWT.ExpiresTime) * time.Second)
+
 	claims := customClaims{
 		Username: username,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: global.CONFIG.JWT.ExpiresTime,
+			ExpiresAt: token.ExpiresAt.Unix(),
 			Issuer:    global.CONFIG.JWT.Issuer,
 		},
 	}
 
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	signedToken, err = token.SignedString([]byte(global.CONFIG.JWT.SigningKey))
+	t := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	signedToken, err := t.SignedString([]byte(global.CONFIG.JWT.SigningKey))
 
-	return signedToken, err
+	if err != nil {
+		return model.Jwt{}, err
+	}
+
+	token.Token = signedToken
+
+	// 当前时间加上过期时间
+
+	err = global.DB.Create(&token).Error
+
+	fmt.Printf(signedToken)
+
+	return token, nil
 }

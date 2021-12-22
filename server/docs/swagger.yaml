@@ -1,5 +1,18 @@
 basePath: /api
 definitions:
+  model.Jwt:
+    properties:
+      ExpiresAt:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: integer
+      token:
+        type: string
+      updatedAt:
+        type: string
+    type: object
   model.Ou:
     properties:
       createdAt:
@@ -34,10 +47,16 @@ definitions:
       updatedAt:
         type: string
     type: object
+  request.LoginForm:
+    properties:
+      name:
+        type: string
+      password:
+        type: string
+    type: object
   result.PageResult:
     properties:
-      list:
-        type: object
+      list: {}
       page:
         type: integer
       pageSize:
@@ -51,12 +70,33 @@ info:
   title: Swagger Example API
   version: 0.0.1
 paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户名和密码
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.LoginForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: jwt token
+          schema:
+            $ref: '#/definitions/model.Jwt'
+      summary: 用户登录
+      tags:
+      - apiPublic
   /ous:
     get:
       consumes:
       - application/json
       parameters:
-      - description: 页码
+      - description: 当前页码
         in: query
         name: page
         type: string
@@ -68,7 +108,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: desc
+          description: 部门列表
           schema:
             allOf:
             - $ref: '#/definitions/result.PageResult'
@@ -80,7 +120,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 分页获取部门列表
+      summary: 获取部门列表
       tags:
       - apiOu
     post:
@@ -102,7 +142,7 @@ paths:
             $ref: '#/definitions/model.Ou'
       security:
       - ApiKeyAuth: []
-      summary: 新增部门
+      summary: 创建部门
       tags:
       - apiOu
   /ous/{id}:
@@ -175,12 +215,33 @@ paths:
       summary: 更新部门
       tags:
       - apiOu
+  /register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户信息
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 用户详情
+          schema:
+            $ref: '#/definitions/model.User'
+      summary: 用户注册
+      tags:
+      - apiPublic
   /users:
     get:
       consumes:
       - application/json
       parameters:
-      - description: 页码
+      - description: 当前页码
         in: query
         name: page
         type: string
@@ -192,7 +253,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: desc
+          description: 用户列表
           schema:
             allOf:
             - $ref: '#/definitions/result.PageResult'
@@ -204,7 +265,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 分页获取用户列表
+      summary: 获取用户列表
       tags:
       - apiUser
     post:

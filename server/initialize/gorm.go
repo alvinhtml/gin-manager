@@ -26,6 +26,7 @@ func MysqlTables(db *gorm.DB) {
 	err := db.AutoMigrate(
 		&model.User{},
 		&model.Ou{},
+		&model.Jwt{},
 	)
 	// err := db.CreateTable(&model.User{});
 	if err != nil {

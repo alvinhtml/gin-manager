@@ -5,6 +5,7 @@ import (
 
 	_ "github.com/alvinhtml/gin-manager/server/docs"
 	"github.com/alvinhtml/gin-manager/server/global"
+	"github.com/alvinhtml/gin-manager/server/middleware"
 	"github.com/alvinhtml/gin-manager/server/router"
 
 	"github.com/gin-gonic/gin"
@@ -31,7 +32,12 @@ func Routers() *gin.Engine {
 	Router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	global.LOG.Info("register swagger handler")
 
+	// 公共路由，无需 JWT 验证
+	PublicGroup := Router.Group("/api")
+	router.InitPublicRouter(PublicGroup)
+
 	ApiGroup := Router.Group("/api")
+	ApiGroup.Use(middleware.AuthJWT())
 	router.InitUserRouter(ApiGroup) // 注册用户路由
 	router.InitOuRouter(ApiGroup)   // 注册部门路由
 

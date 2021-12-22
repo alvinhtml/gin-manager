@@ -75,3 +75,17 @@ func Fail(err error, c *gin.Context) {
 		Message: err.Error(),
 	})
 }
+
+// 认证失败
+func Unauthorized(err error, c *gin.Context) {
+	c.JSON(http.StatusUnauthorized, Message{
+		Message: err.Error(),
+	})
+}
+
+// 参数错误
+func BadRequest(err error, c *gin.Context) {
+	c.JSON(http.StatusBadRequest, Message{
+		Message: err.Error(),
+	})
+}

@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 
 	"github.com/alvinhtml/gin-manager/server/global/response"
@@ -12,7 +13,9 @@ import (
 func AuthJWT() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		token := c.GetHeader("X-Token")
+		token := c.GetHeader("x-token")
+
+		fmt.Println(token)
 
 		if token == "" {
 			header := c.GetHeader("Authorization")

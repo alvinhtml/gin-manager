@@ -41,7 +41,7 @@ func GetOus(c *gin.Context) {
 // @accept		application/json
 // @Produce		application/json
 // @Param 		id path string true "部门id"
-// @success 200 {object} model.Ou "desc"
+// @success 	200 {object} model.Ou "desc"
 // @Router 		/ous/{id} [get]
 func GetOu(c *gin.Context) {
 	var byId request.ById
@@ -56,14 +56,14 @@ func GetOu(c *gin.Context) {
 }
 
 // @Tags			apiOu
-// @Summary 	新增部门
+// @Summary 	创建部门
 // @Security	ApiKeyAuth
 // @accept		application/json
 // @Produce		application/json
 // @Param 		body body model.Ou true "部门信息"
-// @success 200 {object} model.Ou "desc"
+// @success 	200 {object} model.Ou "desc"
 // @Router 		/ous [post]
-func AddOu(c *gin.Context) {
+func CreateOu(c *gin.Context) {
 	var ou model.Ou
 	c.ShouldBindJSON(&ou)
 
@@ -82,7 +82,7 @@ func AddOu(c *gin.Context) {
 // @Produce		application/json
 // @Param 		id path string true "部门id"
 // @Param 		body body model.Ou true "部门信息"
-// @success 200 {object} model.Ou "desc"
+// @success 	200 {object} model.Ou "desc"
 // @Router 		/ous/{id} [put]
 func UpdateOu(c *gin.Context) {
 	var byId request.ById
@@ -107,7 +107,7 @@ func UpdateOu(c *gin.Context) {
 // @accept		application/json
 // @Produce		application/json
 // @Param 		id path string true "部门id"
-// @success 200 {object} model.Ou "desc"
+// @success 	200 {object} model.Ou "desc"
 // @Router 		/ous/{id} [delete]
 func DeleteOu(c *gin.Context) {
 	var byId request.ById

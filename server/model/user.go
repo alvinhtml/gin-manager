@@ -12,5 +12,9 @@ type User struct {
 	Profile  string `json:"headerImg" gorm:"comment:用户头像;type:varchar(255);size:255;"`
 	Status   int    `json:"status" gorm:"comment:状态;type:int(1);size:1;"`
 	OuRefer  uint   `json:"ou_id"`
-	// Ou       Ou     `gorm:"foreignkey:OuRefer"`
+}
+
+type UserWithOu struct {
+	User   `json:"instance"`
+	OuName string `json:"ou_name"`
 }
