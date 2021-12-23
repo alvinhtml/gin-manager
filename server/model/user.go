@@ -14,7 +14,7 @@ type User struct {
 	OuRefer  uint   `json:"ou_id"`
 }
 
-type UserWithOu struct {
-	User   `json:"instance"`
+type UserJoinOu struct {
+	User
 	OuName string `json:"ou_name"`
 }

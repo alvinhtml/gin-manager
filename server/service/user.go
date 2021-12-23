@@ -5,7 +5,6 @@ import (
 
 	"github.com/alvinhtml/gin-manager/server/global"
 	"github.com/alvinhtml/gin-manager/server/model/request"
-	"github.com/alvinhtml/gin-manager/server/model/result"
 
 	"github.com/alvinhtml/gin-manager/server/model"
 	"github.com/alvinhtml/gin-manager/server/utils"
@@ -32,7 +31,7 @@ func CreateUser(u model.User) (err error, user model.User) {
 // @return    err              error
 // @return    list             []result.User
 // @return    total            int
-func GetUsers(info request.PageInfo) (err error, list []result.User, total int64) {
+func GetUsers(info request.PageInfo) (err error, list []model.UserJoinOu, total int64) {
 	limit := info.Size
 	offset := info.Size * (info.Page - 1)
 
@@ -52,8 +51,13 @@ func GetUsers(info request.PageInfo) (err error, list []result.User, total int64
 // @description	get user by id 分页获取数据
 // @return    err             error
 // @return    user       *User
-func GetUser(id uint) (err error, user model.User) {
-	err = global.DB.First(&user, id).Error
+func GetUser(id uint) (err error, user model.UserJoinOu) {
+	err = global.DB.
+		Table("users as a").
+		Joins("join ous as b ON a.ou_refer = b.id").
+		Where("a.id = ?", id).
+		Select("a.*", "b.name as ou_name").
+		First(&user).Error
 	return err, user
 }
 
@@ -99,4 +103,17 @@ func Login(u model.User) (err error) {
 	}
 
 	return nil
+}
+
+// @title    GetUserJoinOu
+// @description   get user join ou, 获取用户所属组织
+// @return    err             error
+// @return    user       *User
+func GetUserJoinOu(id uint) (err error, user model.UserJoinOu) {
+	err = global.DB.Model(&user).
+		Joins("join ous as b ON a.ou_refer = b.id").
+		Where("a.id = ?", id).
+		First(&user).Error
+
+	return err, user
 }

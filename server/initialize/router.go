@@ -39,7 +39,7 @@ func Routers() *gin.Engine {
 	ApiGroup := Router.Group("/api")
 	ApiGroup.Use(middleware.AuthJWT())
 	router.InitUserRouter(ApiGroup) // 注册用户路由
-	router.InitOuRouter(ApiGroup)   // 注册部门路由
+	router.InitOuRouter(ApiGroup)   // 注册组织单位路由
 
 	global.LOG.Info("router register success")
 	return Router

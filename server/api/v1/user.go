@@ -18,7 +18,7 @@ import (
 // @Produce 	application/json
 // @Param 		page query string false "当前页码"
 // @Param 		size query string false "每页显示条数"
-// @success 	200 {object} result.PageResult{list=[]model.Ou} "用户列表"
+// @success 	200 {object} result.PageResult{list=[]model.UserJoinOu} "用户列表"
 // @Router 		/users [get]
 func GetUsers(c *gin.Context) {
 	var pageInfo request.PageInfo
@@ -43,7 +43,7 @@ func GetUsers(c *gin.Context) {
 // @accept 		application/json
 // @Produce 	application/json
 // @Param 		id path string true "id"
-// @Success 	200 {object} model.User "用户详情"
+// @Success 	200 {object} model.UserJoinOu "用户详情"
 // @Router 		/users/{id} [get]
 func GetUser(c *gin.Context) {
 	var byId request.ById
@@ -122,5 +122,3 @@ func CreateUser(c *gin.Context) {
 		response.Success(nil, c)
 	}
 }
-
-// @Tags 			apiUser

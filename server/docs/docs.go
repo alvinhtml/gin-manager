@@ -72,7 +72,7 @@ var doc = `{
                 "tags": [
                     "apiOu"
                 ],
-                "summary": "获取部门列表",
+                "summary": "获取组织单位列表",
                 "parameters": [
                     {
                         "type": "string",
@@ -89,7 +89,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "部门列表",
+                        "description": "组织单位列表",
                         "schema": {
                             "allOf": [
                                 {
@@ -126,10 +126,10 @@ var doc = `{
                 "tags": [
                     "apiOu"
                 ],
-                "summary": "创建部门",
+                "summary": "创建组织单位",
                 "parameters": [
                     {
-                        "description": "部门信息",
+                        "description": "组织单位信息",
                         "name": "body",
                         "in": "body",
                         "required": true,
@@ -164,11 +164,11 @@ var doc = `{
                 "tags": [
                     "apiOu"
                 ],
-                "summary": "获取部门详情",
+                "summary": "获取组织单位详情",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "部门id",
+                        "description": "组织单位id",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -198,17 +198,17 @@ var doc = `{
                 "tags": [
                     "apiOu"
                 ],
-                "summary": "更新部门",
+                "summary": "更新组织单位",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "部门id",
+                        "description": "组织单位id",
                         "name": "id",
                         "in": "path",
                         "required": true
                     },
                     {
-                        "description": "部门信息",
+                        "description": "组织单位信息",
                         "name": "body",
                         "in": "body",
                         "required": true,
@@ -241,11 +241,11 @@ var doc = `{
                 "tags": [
                     "apiOu"
                 ],
-                "summary": "删除部门",
+                "summary": "删除组织单位",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "部门id",
+                        "description": "组织单位id",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -339,7 +339,7 @@ var doc = `{
                                         "list": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/model.Ou"
+                                                "$ref": "#/definitions/model.UserJoinOu"
                                             }
                                         }
                                     }
@@ -416,7 +416,7 @@ var doc = `{
                     "200": {
                         "description": "用户详情",
                         "schema": {
-                            "$ref": "#/definitions/model.User"
+                            "$ref": "#/definitions/model.UserJoinOu"
                         }
                     }
                 }
@@ -557,6 +557,38 @@ var doc = `{
                 },
                 "ou_id": {
                     "type": "integer"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.UserJoinOu": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "headerImg": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "ou_id": {
+                    "type": "integer"
+                },
+                "ou_name": {
+                    "type": "string"
                 },
                 "status": {
                     "type": "integer"

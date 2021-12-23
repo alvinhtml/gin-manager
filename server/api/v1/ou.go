@@ -10,13 +10,13 @@ import (
 )
 
 // @Tags			apiOu
-// @Summary 	获取部门列表
+// @Summary 	获取组织单位列表
 // @Security	ApiKeyAuth
 // @accept		application/json
 // @Produce		application/json
 // @Param 		page query string false "当前页码"
 // @Param 		size query string false "每页显示条数"
-// @success 	200 {object} result.PageResult{list=[]model.Ou} "部门列表"
+// @success 	200 {object} result.PageResult{list=[]model.Ou} "组织单位列表"
 // @Router 		/ous [get]
 func GetOus(c *gin.Context) {
 	var pageInfo request.PageInfo
@@ -36,11 +36,11 @@ func GetOus(c *gin.Context) {
 }
 
 // @Tags			apiOu
-// @Summary 	获取部门详情
+// @Summary 	获取组织单位详情
 // @Security	ApiKeyAuth
 // @accept		application/json
 // @Produce		application/json
-// @Param 		id path string true "部门id"
+// @Param 		id path string true "组织单位id"
 // @success 	200 {object} model.Ou "desc"
 // @Router 		/ous/{id} [get]
 func GetOu(c *gin.Context) {
@@ -56,11 +56,11 @@ func GetOu(c *gin.Context) {
 }
 
 // @Tags			apiOu
-// @Summary 	创建部门
+// @Summary 	创建组织单位
 // @Security	ApiKeyAuth
 // @accept		application/json
 // @Produce		application/json
-// @Param 		body body model.Ou true "部门信息"
+// @Param 		body body model.Ou true "组织单位信息"
 // @success 	200 {object} model.Ou "desc"
 // @Router 		/ous [post]
 func CreateOu(c *gin.Context) {
@@ -76,12 +76,12 @@ func CreateOu(c *gin.Context) {
 }
 
 // @Tags			apiOu
-// @Summary 	更新部门
+// @Summary 	更新组织单位
 // @Security	ApiKeyAuth
 // @accept		application/json
 // @Produce		application/json
-// @Param 		id path string true "部门id"
-// @Param 		body body model.Ou true "部门信息"
+// @Param 		id path string true "组织单位id"
+// @Param 		body body model.Ou true "组织单位信息"
 // @success 	200 {object} model.Ou "desc"
 // @Router 		/ous/{id} [put]
 func UpdateOu(c *gin.Context) {
@@ -102,11 +102,11 @@ func UpdateOu(c *gin.Context) {
 }
 
 // @Tags			apiOu
-// @Summary 	删除部门
+// @Summary 	删除组织单位
 // @Security	ApiKeyAuth
 // @accept		application/json
 // @Produce		application/json
-// @Param 		id path string true "部门id"
+// @Param 		id path string true "组织单位id"
 // @success 	200 {object} model.Ou "desc"
 // @Router 		/ous/{id} [delete]
 func DeleteOu(c *gin.Context) {
