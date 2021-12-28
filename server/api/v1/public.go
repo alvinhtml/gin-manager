@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/alvinhtml/gin-manager/server/global/response"
+	"github.com/alvinhtml/gin-manager/server/model/request"
 	"github.com/alvinhtml/gin-manager/server/service"
 
 	"github.com/alvinhtml/gin-manager/server/model"
@@ -51,5 +52,18 @@ func Register(c *gin.Context) {
 		response.Fail(err, c)
 	} else {
 		response.Success(user, c)
+	}
+}
+
+func Test(c *gin.Context) {
+
+	var pageInfo request.PageQuery
+	err := c.ShouldBindQuery(&pageInfo)
+	fmt.Println(pageInfo)
+
+	if err != nil {
+		response.Fail(err, c)
+	} else {
+		response.Success(pageInfo, c)
 	}
 }

@@ -10,4 +10,5 @@ import (
 func InitPublicRouter(Router *gin.RouterGroup) {
 	Router.POST("/login", v1.Login)
 	Router.POST("/register", v1.Register)
+	Router.GET("/test", v1.Test)
 }

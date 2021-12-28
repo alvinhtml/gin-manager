@@ -31,15 +31,46 @@ func CreateUser(u model.User) (err error, user model.User) {
 // @return    err              error
 // @return    list             []result.User
 // @return    total            int
-func GetUsers(info request.PageInfo) (err error, list []model.UserJoinOu, total int64) {
-	limit := info.Size
-	offset := info.Size * (info.Page - 1)
-
+func GetUsers(pageQuery request.PageQuery) (err error, list []model.UserJoinOu, total int64) {
 	db := global.DB.Model(&model.User{}).
 		Table("users as a").
 		Joins("join ous as b ON a.ou_refer = b.id")
 
+	// search
+	if len(pageQuery.Search) > 0 {
+		for k, v := range pageQuery.Search {
+			db = db.Where("a."+k+" LIKE ?", "%"+v+"%")
+		}
+	}
+
+	// sort
+	if len(pageQuery.Sort) > 0 {
+		length := len(pageQuery.Sort)
+		sort := ""
+		for k, v := range pageQuery.Sort {
+			length--
+			if length > 0 {
+				sort += "a." + k + " " + v + ","
+			} else {
+				sort += "a." + k + " " + v
+			}
+		}
+		db.Order(sort)
+	}
+
+	// filter
+	if len(pageQuery.Filter) > 0 {
+		for k, v := range pageQuery.Filter {
+			db = db.Where("a."+k+" = ?", v)
+		}
+	}
+
+	// count
 	err = db.Count(&total).Error
+
+	// limit
+	limit := pageQuery.Size
+	offset := pageQuery.Size * (pageQuery.Page - 1)
 
 	err = db.Select("a.*", "b.name as ou_name").
 		Limit(limit).Offset(offset).Find(&list).Error

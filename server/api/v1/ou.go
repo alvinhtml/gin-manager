@@ -16,21 +16,28 @@ import (
 // @Produce		application/json
 // @Param 		page query string false "当前页码"
 // @Param 		size query string false "每页显示条数"
+// @Param 		filter query string false "查询条件"
+// @Param 		sort query string false "排序条件"
+// @Param 		search query string false "搜索关键字"
 // @success 	200 {object} result.PageResult{list=[]model.Ou} "组织单位列表"
 // @Router 		/ous [get]
 func GetOus(c *gin.Context) {
-	var pageInfo request.PageInfo
-	c.ShouldBindJSON(&pageInfo)
+	var pageQuery request.PageQuery
 
-	err, list, total := service.GetOus(pageInfo)
+	err := pageQuery.BindQuery(c)
+	if err != nil {
+		response.BadRequest(err, c)
+		return
+	}
+
+	err, list, total := service.GetOus(pageQuery)
 	if err != nil {
 		response.Fail(err, c)
 	} else {
 		response.Success(result.PageResult{
-			List:  list,
-			Total: total,
-			Page:  pageInfo.Page,
-			Size:  pageInfo.Size,
+			List:      list,
+			Total:     total,
+			PageQuery: pageQuery,
 		}, c)
 	}
 }

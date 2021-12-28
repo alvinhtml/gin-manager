@@ -1,6 +1,9 @@
 package v1
 
 import (
+	"encoding/json"
+	"fmt"
+
 	"github.com/alvinhtml/gin-manager/server/global/response"
 	"github.com/alvinhtml/gin-manager/server/model/request"
 	"github.com/alvinhtml/gin-manager/server/model/result"
@@ -18,21 +21,30 @@ import (
 // @Produce 	application/json
 // @Param 		page query string false "当前页码"
 // @Param 		size query string false "每页显示条数"
+// @Param 		filter query string false "查询条件"
+// @Param 		sort query string false "排序条件"
+// @Param 		search query string false "搜索关键字"
 // @success 	200 {object} result.PageResult{list=[]model.UserJoinOu} "用户列表"
 // @Router 		/users [get]
 func GetUsers(c *gin.Context) {
-	var pageInfo request.PageInfo
-	c.ShouldBindJSON(&pageInfo)
+	var pageQuery request.PageQuery
 
-	err, list, total := service.GetUsers(pageInfo)
+	err := pageQuery.BindQuery(c)
+	if err != nil {
+		response.BadRequest(err, c)
+		return
+	}
+	f, _ := json.Marshal(pageQuery)
+	fmt.Println(string(f))
+
+	err, list, total := service.GetUsers(pageQuery)
 	if err != nil {
 		response.Fail(err, c)
 	} else {
 		response.Success(result.PageResult{
-			List:  list,
-			Total: total,
-			Page:  pageInfo.Page,
-			Size:  pageInfo.Size,
+			List:      list,
+			Total:     total,
+			PageQuery: pageQuery,
 		}, c)
 	}
 }

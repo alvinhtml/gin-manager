@@ -19,11 +19,45 @@ func CreateOu(o model.Ou) (err error, ou model.Ou) {
 // @return    err              error
 // @return    list             []result.Ou
 // @return    total            int
-func GetOus(info request.PageInfo) (err error, ous []model.Ou, total int64) {
-	limit := info.Size
-	offset := info.Size * (info.Page - 1)
+func GetOus(pageQuery request.PageQuery) (err error, ous []model.Ou, total int64) {
+	db := global.DB.Model(&model.Ou{})
 
-	err = global.DB.Model(&model.Ou{}).Offset(offset).Limit(limit).Find(&ous).Count(&total).Error
+	// search
+	if len(pageQuery.Search) > 0 {
+		for k, v := range pageQuery.Search {
+			db = db.Where(k+" LIKE ?", "%"+v+"%")
+		}
+	}
+
+	// sort
+	if len(pageQuery.Sort) > 0 {
+		length := len(pageQuery.Sort)
+		sort := ""
+		for k, v := range pageQuery.Sort {
+			length--
+			if length > 0 {
+				sort += k + " " + v + ","
+			} else {
+				sort += k + " " + v
+			}
+		}
+		db.Order(sort)
+	}
+
+	// filter
+	if len(pageQuery.Filter) > 0 {
+		for k, v := range pageQuery.Filter {
+			db = db.Where(k+" = ?", v)
+		}
+	}
+
+	// count
+	err = db.Count(&total).Error
+
+	limit := pageQuery.Size
+	offset := pageQuery.Size * (pageQuery.Page - 1)
+
+	err = db.Offset(offset).Limit(limit).Find(&ous).Error
 
 	return err, ous, total
 }

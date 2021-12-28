@@ -85,6 +85,24 @@ var doc = `{
                         "description": "每页显示条数",
                         "name": "size",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "查询条件",
+                        "name": "filter",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "排序条件",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "搜索关键字",
+                        "name": "search",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -322,6 +340,24 @@ var doc = `{
                         "type": "string",
                         "description": "每页显示条数",
                         "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "查询条件",
+                        "name": "filter",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "排序条件",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "搜索关键字",
+                        "name": "search",
                         "in": "query"
                     }
                 ],
@@ -612,12 +648,30 @@ var doc = `{
         "result.PageResult": {
             "type": "object",
             "properties": {
+                "filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
                 "list": {},
                 "page": {
                     "type": "integer"
                 },
-                "pageSize": {
+                "search": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "size": {
                     "type": "integer"
+                },
+                "sort": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "total": {
                     "type": "integer"

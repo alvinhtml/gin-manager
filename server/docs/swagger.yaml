@@ -77,11 +77,23 @@ definitions:
     type: object
   result.PageResult:
     properties:
+      filter:
+        additionalProperties:
+          type: string
+        type: object
       list: {}
       page:
         type: integer
-      pageSize:
+      search:
+        additionalProperties:
+          type: string
+        type: object
+      size:
         type: integer
+      sort:
+        additionalProperties:
+          type: string
+        type: object
       total:
         type: integer
     type: object
@@ -124,6 +136,18 @@ paths:
       - description: 每页显示条数
         in: query
         name: size
+        type: string
+      - description: 查询条件
+        in: query
+        name: filter
+        type: string
+      - description: 排序条件
+        in: query
+        name: sort
+        type: string
+      - description: 搜索关键字
+        in: query
+        name: search
         type: string
       produces:
       - application/json
@@ -269,6 +293,18 @@ paths:
       - description: 每页显示条数
         in: query
         name: size
+        type: string
+      - description: 查询条件
+        in: query
+        name: filter
+        type: string
+      - description: 排序条件
+        in: query
+        name: sort
+        type: string
+      - description: 搜索关键字
+        in: query
+        name: search
         type: string
       produces:
       - application/json
