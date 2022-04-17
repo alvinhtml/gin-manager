@@ -3,6 +3,7 @@ package initialize
 import (
 	"net/http"
 
+	v1 "github.com/alvinhtml/gin-manager/server/api/v1"
 	_ "github.com/alvinhtml/gin-manager/server/docs"
 	"github.com/alvinhtml/gin-manager/server/global"
 	"github.com/alvinhtml/gin-manager/server/middleware"
@@ -38,8 +39,9 @@ func Routers() *gin.Engine {
 
 	ApiGroup := Router.Group("/api")
 	ApiGroup.Use(middleware.AuthJWT())
-	router.InitUserRouter(ApiGroup) // 注册用户路由
-	router.InitOuRouter(ApiGroup)   // 注册组织单位路由
+	ApiGroup.GET("/profile", v1.GetProfile) // 获取用户简介
+	router.InitUserRouter(ApiGroup)         // 注册用户路由
+	router.InitOuRouter(ApiGroup)           // 注册组织单位路由
 
 	global.LOG.Info("router register success")
 	return Router

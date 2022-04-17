@@ -92,6 +92,20 @@ func GetUser(id uint) (err error, user model.UserJoinOu) {
 	return err, user
 }
 
+// @title    GetUserByName
+// @description   get user by name, 用户根据用户名获取用户信息
+// @return    err             error
+// @return    user       *User
+func GetUserByName(name string) (err error, user model.UserJoinOu) {
+	err = global.DB.
+		Table("users as a").
+		Joins("join ous as b ON a.ou_refer = b.id").
+		Where("a.name = ?", name).
+		Select("a.*", "b.name as ou_name").
+		First(&user).Error
+	return err, user
+}
+
 // @title    UpdateUser
 // @description   update user info, 用户更新自己信息
 // @return    err             error

@@ -2,6 +2,7 @@ package v1
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 
 	"github.com/alvinhtml/gin-manager/server/global/response"
@@ -132,5 +133,36 @@ func CreateUser(c *gin.Context) {
 		response.Fail(err, c)
 	} else {
 		response.Success(nil, c)
+	}
+}
+
+// @Tags 			apiUser
+// @Summary 	获取用户简介
+// @Security 	ApiKeyAuth
+// @accept 		application/json
+// @Produce 	application/json
+// @Success 	200 {object} result.UserProfile "用户简介"
+// @Router 		/users/profile [get]
+func GetProfile(c *gin.Context) {
+	// 获取 token
+	token := c.GetHeader("x-token")
+
+	// 解析 token
+	username, err := service.ParseToken(token)
+	if err != nil {
+		response.Unauthorized(errors.New("Invalid token!"), c)
+		return
+	}
+
+	err, profile := service.GetUserByName(username)
+	if err != nil {
+		response.Fail(err, c)
+	} else {
+		userProfile := result.UserProfile{
+			profile,
+			true,
+		}
+
+		response.Success(userProfile, c)
 	}
 }

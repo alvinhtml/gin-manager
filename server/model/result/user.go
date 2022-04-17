@@ -4,7 +4,7 @@ import (
 	"github.com/alvinhtml/gin-manager/server/model"
 )
 
-type User struct {
-	model.User
-	OuName string `json:"ou_name" from:"ou_name"`
+type UserProfile struct {
+	model.UserJoinOu
+	IsLogin bool `json:"is_login" from:"is_login"`
 }

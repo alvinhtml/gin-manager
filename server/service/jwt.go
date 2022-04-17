@@ -77,3 +77,28 @@ func CreateToken(username string) (token model.Jwt, err error) {
 
 	return token, nil
 }
+
+// @title ParseToken
+// @description Parses a JWT token
+// @return    token           string
+// @return    err             error
+func ParseToken(token string) (username string, err error) {
+	jwtToken, err := jwt.ParseWithClaims(
+		string(token),
+		&customClaims{},
+		func(token *jwt.Token) (interface{}, error) {
+			return []byte(global.CONFIG.JWT.SigningKey), nil
+		},
+	)
+
+	if err != nil {
+		return "", err
+	}
+
+	claims, ok := jwtToken.Claims.(*customClaims)
+	if !ok {
+		return "", errors.New("couldn't parse claims")
+	}
+
+	return claims.Username, nil
+}
